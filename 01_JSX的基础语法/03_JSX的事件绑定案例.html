@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .active {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+
+
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <script type="text/babel">
+
+        class App extends React.Component {
+            constructor() {
+                super()
+                this.state = {
+                    list: ['沸羊羊', '黑小虎', '双面龟', 'Tom'],
+                    currentIndex: 0
+                }
+            }
+
+            handleIndex (index) {
+                this.setState({
+                    currentIndex: index
+                })
+            }
+
+            render () {
+                const { list, currentIndex } = this.state
+                return (
+                    <ul>
+                        {
+                            list.map((item, index) => {
+                                return (
+                                    <li
+                                        className={currentIndex === index ? 'active' : ''}
+                                        key={item}
+                                        onClick={() => this.handleIndex(index)}
+                                    >
+                                        {item}
+                                    </li>
+                                )
+                            })
+                        }
+                    </ul>
+                )
+            }
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'))
+        root.render(<App />)
+
+    </script>
+</body>
+
+</html>

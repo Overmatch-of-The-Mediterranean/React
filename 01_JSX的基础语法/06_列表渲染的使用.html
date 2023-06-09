@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root"></div>
+
+
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <script type="text/babel">
+
+        class App extends React.Component {
+            constructor() {
+                super()
+                this.state = {
+                    students: [
+                        {
+                            id: 1,
+                            name: '小明',
+                            age: 18
+                        },
+                        {
+                            id: 2,
+                            name: '小红',
+                            age: 20
+                        },
+                        {
+                            id: 3,
+                            name: '小新',
+                            age: 5
+                        },
+                        {
+                            id: 1,
+                            name: '小兰',
+                            age: 18
+                        }
+                    ]
+                }
+            }
+
+            render () {
+                const { students } = this.state
+                return (
+                    <div className="list">
+                        {
+                            students.filter(item => item.age >= 18).slice(0, 2).map(item => {
+                                return (
+                                    <div className="item" key={item.id}>
+                                        <h2>学号：{item.id}</h2>
+                                        <h2>姓名：{item.name}</h2>
+                                        <h2>年龄：{item.age}</h2>
+                                    </div>
+                                )
+                            })
+                        }
+                    </div>
+                )
+            }
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'))
+        root.render(<App />)
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root"></div>
+
+
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <script type="text/babel">
+
+        class App extends React.Component {
+            constructor() {
+                super()
+                this.state = {
+                    message: 'Hello World',
+                    counter: 100
+                }
+            }
+
+            btn1Click (name, age, event) {
+                console.log('name age: ', name, age);
+                console.log('event: ', event);
+                console.log('this: ', this);
+            }
+            btn2Click (event, name, age) {
+                console.log('event: ', event);
+                console.log('name age: ', name, age);
+                console.log('this: ', this);
+            }
+
+            render () {
+                const { message, counter } = this.state
+
+                return (
+                    <div>
+                        <h2>{message}</h2>
+
+                        <h2>{counter}</h2>
+
+                        {/* event的参数传递与额外的参数传递 */}
+                        {/* bind方式传递额外参数不推荐使用，其event默认是函数的最后一个参数 */}
+                        <button onClick={this.btn1Click.bind(this, 'jerry', 20)}>btn1</button>
+
+                        {/* 推荐使用箭头函数方式传递参数 */}
+                        <button onClick={(event) => this.btn2Click(event, 'tom', 20)}>btn2</button>
+                    </div>
+                )
+            }
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'))
+
+        root.render(<App />)
+
+    </script>
+</body>
+
+</html>

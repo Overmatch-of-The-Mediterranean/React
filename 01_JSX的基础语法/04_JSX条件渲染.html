@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root"></div>
+
+
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <script type="text/babel">
+
+        class App extends React.Component {
+            constructor() {
+                super()
+                this.state = {
+                    isReady: true,
+                    friend: {
+                        name: 'tom',
+                        age: 20
+                    }
+                }
+            }
+
+            render () {
+                const { isReady, friend } = this.state
+                let ele = null
+
+                if (isReady) {
+                    ele = <h2>战斗马上开始！</h2>
+                } else {
+                    ele = <h2>请准备好！</h2>
+                }
+                return (
+                    <div>
+                        {/* 方式一：根据条件赋值给变量不同内容 */}
+                        <div>
+                            {ele}
+                        </div>
+
+                        {/* 方式二：三元表达式 */}
+                        <div>
+                            {isReady ? <h1>fight</h1> : <h2>ready</h2>}
+                        </div>
+
+                        {/* 方式三：&&逻辑与运算符 */}
+                        <div>
+                            {isReady && <div>{friend.name + ' ' + friend.age}</div>}
+                        </div>
+                    </div>
+                )
+            }
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'))
+        root.render(<App />)
+
+    </script>
+</body>
+
+</html>

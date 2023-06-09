@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root"></div>
+
+
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <script type="text/babel">
+
+        class App extends React.Component {
+            constructor() {
+                super()
+                this.state = {
+                    isShow: true
+                }
+            }
+
+            changeShow () {
+                this.setState({
+                    isShow: !this.state.isShow
+                })
+            }
+
+            render () {
+                const { isShow } = this.state
+                let showEle = null
+
+                if (isShow) {
+                    showEle = <h2>地中海强者</h2>
+                }
+                return (
+                    <div>
+                        {/* 第一种条件渲染方式 */}
+                        <button onClick={() => this.changeShow()}>改变</button>
+                        <h2>{showEle}</h2>
+
+                        {/* 第二种条件渲染方式 */}
+                        {isShow && <h2>哈哈哈哈</h2>}
+
+                        {/* v-show效果 */}
+                        <h2 style={{ display: isShow ? 'block' : 'none' }}>嘿嘿嘿</h2>
+                    </div>
+                )
+            }
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'))
+        root.render(<App />)
+
+    </script>
+</body>
+
+</html>
