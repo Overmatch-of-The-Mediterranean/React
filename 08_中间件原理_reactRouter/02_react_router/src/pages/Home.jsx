@@ -1,7 +1,15 @@
 import React, { PureComponent } from 'react'
 import { Outlet,Link } from 'react-router-dom'
+import withRouter from '../hoc/with_router'
 
 export class Home extends PureComponent {
+
+    navigateTo(path){
+        const { router } = this.props
+        const { navigate } = router
+        navigate(path)
+    }
+
   render() {
     return (
       <div>
@@ -9,6 +17,7 @@ export class Home extends PureComponent {
         <div>
             <Link to="/home/recommend">推荐</Link>
             <Link to="/home/ranking">排行</Link>
+            <button onClick={()=>this.navigateTo('/home/songMenu')}>歌曲菜单</button>
         </div>
 
         <Outlet/>
@@ -17,4 +26,4 @@ export class Home extends PureComponent {
   }
 }
 
-export default Home
+export default withRouter(Home)
